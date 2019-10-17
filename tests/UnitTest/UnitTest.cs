@@ -37,9 +37,9 @@ namespace FilterModuleUnitTest
             Assert.Equal(expected, result.Properties["customTestKey"]);
         }
 
-        private Message CreateMessage(int temperature)
+        private Message CreateMessage(int humidity)
         {
-            var messageBody = CreateMessageBody(temperature);
+            var messageBody = CreateMessageBody(humidity);
             var messageString = JsonConvert.SerializeObject(messageBody);
             var messageBytes = Encoding.UTF8.GetBytes(messageString);
 
@@ -50,19 +50,19 @@ namespace FilterModuleUnitTest
             };
         }
 
-        private MessageBody CreateMessageBody(int temperature)
+        private MessageBody CreateMessageBody(int humidity)
         {
             var messageBody = new MessageBody
             {
                 machine = new Machine
                 {
-                    temperature = temperature,
+                    temperature = 0,
                     pressure = 0
                 },
                 ambient = new Ambient
                 {
                     temperature = 0,
-                    humidity = 0
+                    humidity = humidity
                 },
                 timeCreated = DateTime.UtcNow.ToString("O"),
             };
